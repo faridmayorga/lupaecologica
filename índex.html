@@ -6,75 +6,129 @@
     <title>Lupa Ecológica | Mongabay Perú</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; color: #333; }
-        .hero { background: #1a472a; color: white; padding: 60px 0; border-bottom: 5px solid #2e7d32; }
-        .card { border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .btn-download { background-color: #2e7d32; color: white; }
-        .btn-download:hover { background-color: #1b5e20; color: white; }
-        footer { padding: 40px 0; background: #222; color: #bbb; margin-top: 50px; }
+        /* Paleta de colores y fuentes */
+        :root {
+            --verde-oscuro: #1a472a;
+            --verde-acento: #2e7d32;
+            --gris-claro: #f4f7f5;
+        }
+
+        body { 
+            background-color: var(--gris-claro); 
+            color: #2c3e50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero { 
+            background: var(--verde-oscuro); 
+            color: white; 
+            padding: 80px 0; 
+            border-bottom: 6px solid var(--verde-acento);
+        }
+
+        .card { 
+            border: none; 
+            border-top: 4px solid var(--verde-acento);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease;
+        }
+
+        .card:hover { 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-verde { 
+            background-color: var(--verde-oscuro); 
+            color: white; 
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-verde:hover { 
+            background-color: var(--verde-acento); 
+            color: white; 
+        }
+
+        .list-group-item {
+            border-left: 0;
+            border-right: 0;
+            padding: 15px 20px;
+        }
+
+        footer { 
+            padding: 40px 0; 
+            background: #111; 
+            color: #888; 
+            margin-top: 60px; 
+        }
     </style>
 </head>
 <body>
 
     <header class="hero text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold">🔍 Lupa Ecológica</h1>
-            <p class="lead">Análisis Semántico de la Agenda Ambiental en el Perú (2020–2025)</p>
+            <h1 class="display-3 fw-bold">🔍 Lupa Ecológica</h1>
+            <p class="lead opacity-75">Análisis Semántico de la Agenda Ambiental en el Perú (2020–2025)</p>
         </div>
     </header>
 
     <main class="container my-5">
-        <section class="row mb-5 text-center">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="fw-bold">Sobre el Proyecto</h2>
-                <p class="text-muted">Exploración masiva de datos mediante Inteligencia Artificial (NLP) para entender qué temas dominan la conversación ambiental en Mongabay Perú.</p>
+        
+        <section class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h4 fw-bold text-uppercase mb-4">Presentación del Proyecto</h2>
+                <p>Este sitio expone los resultados de un proceso de minería de datos aplicado al archivo histórico de Mongabay Perú. A través del procesamiento de lenguaje natural, hemos categorizado la cobertura periodística en ejes temáticos clave para entender la salud de los ecosistemas y la gobernabilidad ambiental en el país.</p>
             </div>
         </section>
 
         <section class="mb-5">
-            <h3 class="mb-4 text-center">📁 Descarga de Datos Procesados</h3>
+            <h3 class="h5 fw-bold mb-4 text-center text-uppercase">Archivos Maestros de la Investigación</h3>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 p-3 text-center">
-                        <h5>Base Maestra</h5>
-                        <p class="small text-muted">Todos los titulares con sus activadores semánticos.</p>
-                        <a href="data/mongabay_semantico_con_activadores.csv" class="btn btn-download mt-auto">Descargar CSV</a>
+                <div class="col-md-6">
+                    <div class="card h-100 p-4">
+                        <h4 class="h6 fw-bold">Base de Datos Semántica</h4>
+                        <p class="small text-muted">Contiene los 1,201 titulares analizados con sus respectivos activadores léxicos identificados por spaCy.</p>
+                        <a href="data/mongabay_semantico_con_activadores.csv" class="btn btn-verde mt-auto">Descargar Dataset Completo</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 p-3 text-center">
-                        <h5>Resumen de Ejes</h5>
-                        <p class="small text-muted">Conteo estadístico de frecuencias temáticas.</p>
-                        <a href="data/resumen_ejes_semanticos.csv" class="btn btn-download mt-auto">Descargar CSV</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 p-3 text-center">
-                        <h5>Scripts de Python</h5>
-                        <p class="small text-muted">Accede al código fuente en el repositorio.</p>
-                        <a href="https://github.com/TU_USUARIO/TU_REPO" class="btn btn-outline-dark mt-auto">Ver en GitHub</a>
+                <div class="col-md-6">
+                    <div class="card h-100 p-4">
+                        <h4 class="h6 fw-bold">Resumen Estadístico</h4>
+                        <p class="small text-muted">Consolidado de frecuencias por eje semántico utilizado para la visualización de resultados cuantitativos.</p>
+                        <a href="data/resumen_ejes_semanticos.csv" class="btn btn-verde mt-auto">Descargar Resumen</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h3 class="mb-4 text-center"> Desglose por Ejes Semánticos</h3>
-            <div class="list-group shadow-sm">
-                <a href="data/ejes/biodiversidad_conservacion.csv" class="list-group-item list-group-item-action"> Biodiversidad y Conservación (CSV)</a>
-                <a href="data/ejes/politica_gobernabilidad.csv" class="list-group-item list-group-item-action"> Política y Gobernabilidad (CSV)</a>
-                <a href="data/ejes/sociedad_comunidades.csv" class="list-group-item list-group-item-action"> Sociedad y Comunidades (CSV)</a>
-                <a href="data/ejes/economia_desarrollo.csv" class="list-group-item list-group-item-action"> Economía y Desarrollo (CSV)</a>
-                <a href="data/ejes/crimen_ilegalidad.csv" class="list-group-item list-group-item-action"> Crimen e Ilegalidad (CSV)</a>
+        <section class="row justify-content-center">
+            <div class="col-lg-10">
+                <h3 class="h5 fw-bold mb-4 text-center text-uppercase">Acceso por Categorías</h3>
+                <div class="list-group shadow-sm border-0">
+                    <a href="data/ejes/biodiversidad_conservacion.csv" class="list-group-item list-group-item-action border-top">Biodiversidad y Conservación (CSV)</a>
+                    <a href="data/ejes/politica_gobernabilidad.csv" class="list-group-item list-group-item-action">Política y Gobernabilidad (CSV)</a>
+                    <a href="data/ejes/sociedad_comunidades.csv" class="list-group-item list-group-item-action">Sociedad y Comunidades (CSV)</a>
+                    <a href="data/ejes/economia_desarrollo.csv" class="list-group-item list-group-item-action">Economía y Desarrollo (CSV)</a>
+                    <a href="data/ejes/crimen_ilegalidad.csv" class="list-group-item list-group-item-action border-bottom">Crimen e Ilegalidad (CSV)</a>
+                </div>
             </div>
         </section>
+
     </main>
 
     <footer class="text-center">
         <div class="container">
-            <p>Proyecto académico basado en datos de Mongabay.</p>
-            <p class="small">Procesado con Python y spaCy.</p>
+            <p class="mb-1">Proyecto Académico de Comunicación y Datos</p>
+            <p class="small text-uppercase">Fuente de datos: Mongabay Perú | Herramientas: Python, spaCy, GitHub Pages</p>
         </div>
     </footer>
 
