@@ -61,11 +61,11 @@ El procesamiento de los titulares mediante los diccionarios de lemas arrojó los
 ### Distribución por Frecuencia
 | Eje Semántico | Frecuencia (Menciones) |
 | :--- | :---: |
-| Biodiversidad y Conservación | 584 |
-| Política y Gobernabilidad | 281 |
-| Sociedad y Comunidades | 237 |
-| Economía y Desarrollo | 230 |
-| Crimen e Ilegalidad | 148 |
+| Biodiversidad y Conservación | 650 |
+| Sociedad y Comunidades | 289 |
+| Crimen e Ilegalidad | 285 |
+| Economía y Desarrollo | 145 |
+| Política y Gobernabilidad | 111 |
 
 ---
 
