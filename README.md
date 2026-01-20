@@ -23,7 +23,7 @@ El objetivo principal es determinar cómo se distribuye el interés informativo 
 El proceso se divide en una fase de recolección automatizada y una fase de procesamiento lingüístico:
 
 ### Extracción de Datos
-Se desarrolló un script en **Python** utilizando las librerías `Requests` y `BeautifulSoup` para realizar el raspado (*scraping*) de 41 páginas del archivo histórico de Mongabay Perú.
+Se desarrolló un script en **Python** utilizando las librerías `Requests` y `BeautifulSoup` para realizar el raspado (*scraping*) de 41 páginas del archivo histórico de Mongabay Perú. Posteriormente se seleccionaron sólo las publicadas entre 2020 y 2025.
 
 * **Campos recolectados:** De cada artículo se extrajo el titular, el autor, la fecha de publicación y el enlace directo.
 
