@@ -22,11 +22,11 @@ El objetivo principal es determinar cómo se distribuye el interés informativo 
 ## 3. Metodología Técnica
 El proceso se divide en una fase de recolección automatizada y una fase de procesamiento lingüístico:
 
-### 📡 Extracción de Datos
+### Extracción de Datos
 Se desarrolló un script en **Python** utilizando las librerías `Requests` y `BeautifulSoup` para realizar el raspado (*scraping*) de 41 páginas del archivo histórico de Mongabay Perú.
 * **Campos recolectados:** Titular, autor, fecha de publicación y enlace directo.
 
-### 🧠 Procesamiento con spaCy y "Activadores"
+### Procesamiento con spaCy y "Activadores"
 Para el análisis de los textos, se empleó **spaCy**, una biblioteca de procesamiento de lenguaje natural (NLP) de nivel industrial.
 * **Lematización:** El modelo `es_core_news_md` reduce cada palabra a su raíz lingüística (**lema**), permitiendo identificar conceptos independientemente de sus conjugaciones o plurales.
 * **Detección por Activadores:** El sistema utiliza términos específicos asociados a cada eje semántico.
