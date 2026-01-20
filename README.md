@@ -48,7 +48,7 @@ El análisis se concentra en un periodo crítico de transformaciones globales y 
 ## 5. Limitaciones del Estudio
 * **Unidad de Análisis:** El estudio se limita exclusivamente a los **titulares** de las noticias. No procesa el cuerpo de los artículos, los pies de foto ni el contenido multimedia.
 * **Nivel de Análisis Semántico:** La detección de ejes se basa en una técnica de **coincidencia léxica mediante lemas**. El algoritmo identifica la presencia de conceptos clave, pero no realiza un análisis de sentimiento profundo ni interpreta ironías.
-* **Definición de Ejes:** Las categorías (ejes semánticos) son predefinidas por el investigador, lo que implica un enfoque deductivo sobre la muestra de datos.
+* **Definición de Ejes:** Las categorías (ejes semánticos) fueron predefinidas por el investigador, lo que implica un enfoque deductivo sobre la muestra de datos.
 
 ---
 
