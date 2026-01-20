@@ -12,29 +12,41 @@
             --fondo: #fcfdfc;
             --texto: #2c3e50;
             --card-bg: white;
-            --btn-oscuro-bg: #222;
-            --btn-oscuro-txt: white;
+            --header-bg: #1a472a;
+            --footer-bg: #111;
         }
 
-        /* Variables de Modo Oscuro */
         [data-theme="dark"] {
             --fondo: #121212;
             --texto: #e0e0e0;
             --card-bg: #1e1e1e;
             --verde-principal: #2e7d32;
             --verde-claro: #4caf50;
+            --header-bg: #0a1f12;
+            --footer-bg: #000;
         }
 
         body { 
             background-color: var(--fondo); 
             color: var(--texto);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
+            opacity: 0;
+            animation: fadeInPage 1s ease-in forwards;
+        }
+
+        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Toggle Modo Oscuro */
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
         }
 
         .hero { 
-            background: var(--verde-principal); 
+            background: var(--header-bg); 
             color: white; 
             padding: 100px 0 60px 0; 
             border-bottom: 8px solid var(--verde-claro);
@@ -48,47 +60,19 @@
             margin-bottom: 25px;
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 1.25rem;
         }
 
-        .table-custom {
-            background: var(--card-bg);
-            color: var(--texto);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .table-custom thead {
-            background: var(--verde-principal);
-            color: white;
+        .card-download, .highlight-box, .table-custom, .list-group-item {
+            background-color: var(--card-bg) !important;
+            color: var(--texto) !important;
         }
 
         .btn-verde {
             background-color: var(--verde-principal);
-            color: white;
-            border: none;
+            color: white; border: none; transition: 0.3s;
         }
 
-        .btn-verde:hover {
-            background-color: var(--verde-claro);
-            color: white;
-        }
-
-        /* Botón de cambio de modo */
-        .theme-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
-            padding: 10px 15px;
-            border-radius: 50px;
-            background: var(--btn-oscuro-bg);
-            color: var(--btn-oscuro-txt);
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+        .btn-verde:hover { background-color: var(--verde-claro); color: white; }
 
         /* Card Flotante de Descargas */
         .floating-card {
@@ -96,68 +80,57 @@
             bottom: 20px;
             right: 20px;
             width: 280px;
-            background: var(--card-bg);
-            border-top: 5px solid var(--verde-claro);
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
             z-index: 1000;
-            border-radius: 10px;
-            padding: 15px;
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--verde-claro);
         }
 
-        .floating-card h6 {
-            font-weight: bold;
-            color: var(--verde-principal);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        .floating-link {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--texto);
-            text-decoration: none;
-            margin-bottom: 8px;
-            padding: 5px;
-            border-radius: 4px;
-            background: rgba(0,0,0,0.05);
-        }
-
-        .floating-link:hover {
-            background: var(--verde-claro);
+        .floating-card .card-header {
+            background: var(--verde-principal);
             color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 10px;
         }
 
-        footer {
-            background: #111;
-            color: #888;
-            padding: 50px 0;
-            margin-top: 80px;
+        .floating-card .list-group-item {
+            font-size: 0.85rem;
+            padding: 8px 15px;
+            border: none;
+            border-bottom: 1px solid rgba(128,128,128,0.2);
         }
 
-        .highlight-box {
-            background: rgba(46, 125, 50, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid var(--verde-claro);
+        .floating-card a {
+            text-decoration: none;
+            color: var(--verde-claro);
+            display: block;
         }
+
+        .floating-card a:hover { color: var(--verde-principal); }
+
+        footer { background: var(--footer-bg); color: #888; padding: 50px 0; margin-top: 80px; }
 
         @media (max-width: 768px) {
-            .floating-card { display: none; } /* Ocultar en móviles para no tapar contenido */
+            .floating-card { display: none; } /* Ocultar en móviles para no tapar texto */
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
 
-    <button class="theme-switch" onclick="toggleTheme()">🌓 Modo</button>
+    <div class="theme-switch-wrapper">
+        <button id="theme-toggle" class="btn btn-sm btn-outline-light">🌙 Modo Oscuro</button>
+    </div>
 
-    <div class="floating-card">
-        <h6>Acceso Rápido</h6>
-        <a href="https://faridmayorga.github.io/lupaecologica/data/mongabay_peru_raw.csv" download class="floating-link">📄 Datos Raw (CSV)</a>
-        <a href="https://faridmayorga.github.io/lupaecologica/scripts/scrape_mongabay.py" download class="floating-link">🐍 Código: Scraper (PY)</a>
-        <a href="https://faridmayorga.github.io/lupaecologica/scripts/process_analisis_semantico_mongabay.py" download class="floating-link">🐍 Código: Análisis (PY)</a>
-        <a href="https://faridmayorga.github.io/lupaecologica/data/mongabay_semantico_con_activadores.csv" download class="floating-link">📊 Base Semántica Full</a>
+    <div class="floating-card card">
+        <div class="card-header text-center">📁 Accesos Directos</div>
+        <div class="list-group list-group-flush">
+            <div class="list-group-item"><a href="data/mongabay_semantico_con_activadores.csv" download>Dataset Semántico</a></div>
+            <div class="list-group-item"><a href="data/mongabay_peru_raw.csv" download>Datos Raw</a></div>
+            <div class="list-group-item"><a href="scripts/scrape_mongabay.py" download>Código Scraper</a></div>
+            <div class="list-group-item"><a href="scripts/process_analisis_semantico_mongabay.py" download>Código Análisis</a></div>
+        </div>
     </div>
 
     <header class="hero text-center">
@@ -201,17 +174,17 @@
                     </div>
                 </section>
 
-                <section class="my-5 p-4 bg-light border rounded" style="background-color: var(--card-bg) !important;">
+                <section class="my-5 p-4 bg-light border rounded shadow-sm card-download">
                     <h3 class="h5 fw-bold text-center mb-4">RECURSOS TÉCNICOS</h3>
-                    <div class="row g-3">
+                    <div class="row g-3 text-center">
                         <div class="col-md-4">
-                            <a href="scripts/scrape_mongabay.py" download class="btn btn-outline-dark w-100" style="color: var(--texto); border-color: var(--texto);">Código: Scraper (PY)</a>
+                            <a href="scripts/scrape_mongabay.py" download class="btn btn-outline-dark w-100">Código: Scraper (PY)</a>
                         </div>
                         <div class="col-md-4">
-                            <a href="scripts/process_analisis_semantico_mongabay.py" download class="btn btn-outline-dark w-100" style="color: var(--texto); border-color: var(--texto);">Código: Análisis (PY)</a>
+                            <a href="scripts/process_analisis_semantico_mongabay.py" download class="btn btn-outline-dark w-100">Código: Análisis (PY)</a>
                         </div>
                         <div class="col-md-4">
-                            <a href="data/mongabay_peru_raw.csv" download class="btn btn-outline-dark w-100" style="color: var(--texto); border-color: var(--texto);">Datos Raw (CSV)</a>
+                            <a href="data/mongabay_peru_raw.csv" download class="btn btn-outline-dark w-100">Datos Raw (CSV)</a>
                         </div>
                     </div>
                 </section>
@@ -219,9 +192,9 @@
                 <section>
                     <h2 class="section-title">4. Descripción del Corpus (2020–2025)</h2>
                     <div class="row text-center">
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm"><strong>Rango</strong><br>2020 - 2025</div></div>
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm"><strong>Volumen</strong><br>1,201 Titulares</div></div>
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm"><strong>Geografía</strong><br>Perú</div></div>
+                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm highlight-box"><strong>Rango</strong><br>2020 - 2025</div></div>
+                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm highlight-box"><strong>Volumen</strong><br>1,201 Titulares</div></div>
+                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm highlight-box"><strong>Geografía</strong><br>Perú</div></div>
                     </div>
                 </section>
 
@@ -246,7 +219,7 @@
                             <thead>
                                 <tr>
                                     <th>Eje Semántico</th>
-                                    <th class="text-center">Frecuencia (Menciones)</th>
+                                    <th class="text-center">Frecuencia</th>
                                     <th class="text-center">Descarga</th>
                                 </tr>
                             </thead>
@@ -261,25 +234,17 @@
                     </div>
                     
                     <div class="text-center mt-4">
-                        <a href="data/mongabay_semantico_con_activadores.csv" download class="btn btn-verde p-3 fw-bold">DESCARGAR BASE DE DATOS SEMÁNTICA COMPLETA</a>
+                        <a href="data/mongabay_semantico_con_activadores.csv" download class="btn btn-verde p-3 fw-bold shadow">DESCARGAR BASE DE DATOS SEMÁNTICA COMPLETA</a>
                     </div>
                 </section>
 
                 <section>
                     <h2 class="section-title">7. Conclusiones Descriptivas</h2>
                     <div class="row g-4">
-                        <div class="col-md-6">
-                            <p><strong>Frecuencia Temática:</strong> Prevalencia marcada del eje "Biodiversidad y Conservación", consistente con el perfil de la fuente.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Multitematicidad:</strong> Las noticias relacionan problemas ambientales con múltiples dimensiones simultáneamente.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Identificación:</strong> El modelo categorizó el 81.4% de la muestra, validando la metodología.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Potencial:</strong> Base para futuras investigaciones sobre tendencias temporales o regionales.</p>
-                        </div>
+                        <div class="col-md-6"><p><strong>Frecuencia Temática:</strong> Prevalencia marcada del eje "Biodiversidad y Conservación", consistente con el perfil de la fuente.</p></div>
+                        <div class="col-md-6"><p><strong>Multitematicidad:</strong> Las noticias relacionan problemas ambientales con múltiples dimensiones simultáneamente.</p></div>
+                        <div class="col-md-6"><p><strong>Identificación:</strong> El modelo categorizó el 81.4% de la muestra, validando la metodología.</p></div>
+                        <div class="col-md-6"><p><strong>Potencial:</strong> Base para futuras investigaciones sobre tendencias temporales o regionales.</p></div>
                     </div>
                 </section>
 
@@ -295,15 +260,22 @@
     </footer>
 
     <script>
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-            } else {
+        // Script para el cambio de tema
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleBtn.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'light') {
                 body.setAttribute('data-theme', 'dark');
+                toggleBtn.innerText = '☀️ Modo Claro';
+                toggleBtn.classList.replace('btn-outline-light', 'btn-outline-warning');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                toggleBtn.innerText = '🌙 Modo Oscuro';
+                toggleBtn.classList.replace('btn-outline-warning', 'btn-outline-light');
             }
-        }
+        });
     </script>
+
 </body>
 </html>
