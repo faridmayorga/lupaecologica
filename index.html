@@ -11,224 +11,220 @@
             --verde-claro: #2e7d32;
             --fondo: #fcfdfc;
             --texto: #2c3e50;
+            --card-bg: #ffffff;
+            --card-border: #e0e0e0;
+        }
+
+        [data-bs-theme="dark"] {
+            --fondo: #121212;
+            --texto: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --card-border: #333333;
+            --verde-principal: #2e7d32;
+            --verde-claro: #4caf50;
         }
 
         body { 
             background-color: var(--fondo); 
             color: var(--texto);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            opacity: 0;
-            animation: fadeInPage 1s ease-in forwards;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        @keyframes fadeInPage {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        /* Hero */
         .hero { 
             background: var(--verde-principal); 
             color: white; 
-            padding: 100px 0 60px 0; 
+            padding: 80px 0 40px 0; 
             border-bottom: 8px solid var(--verde-claro);
         }
 
+        /* Cards y Secciones */
         .section-title {
             color: var(--verde-principal);
             border-left: 5px solid var(--verde-claro);
             padding-left: 15px;
-            margin-top: 50px;
-            margin-bottom: 25px;
+            margin: 40px 0 20px 0;
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 1.25rem;
         }
 
-        .card-download {
-            border: 1px solid #e0e0e0;
-            border-top: 4px solid var(--verde-claro);
-            transition: all 0.3s ease;
-            background: white;
+        .card-custom {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
         }
 
-        .card-download:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        /* Botón Flotante de Descargas */
+        .floating-dl {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .dl-menu {
+            background-color: var(--card-bg);
+            border: 1px solid var(--verde-principal);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            padding: 15px;
+            display: none;
+            width: 250px;
+            margin-bottom: 10px;
+        }
+
+        .dl-menu a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: var(--texto);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            transition: 0.2s;
+        }
+
+        .dl-menu a:hover {
+            background-color: var(--verde-principal);
+            color: white;
+        }
+
+        /* Switch de Modo */
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--verde-principal);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .btn-verde {
             background-color: var(--verde-principal);
             color: white;
             border: none;
-            transition: 0.3s;
         }
 
-        .btn-verde:hover {
-            background-color: var(--verde-claro);
-            color: white;
-        }
+        .btn-verde:hover { background-color: var(--verde-claro); color: white; }
 
-        .table-custom {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .table-custom thead {
-            background: var(--verde-principal);
-            color: white;
-        }
-
-        footer {
-            background: #111;
-            color: #888;
-            padding: 50px 0;
-            margin-top: 80px;
-        }
-
-        .highlight-box {
-            background: #e8f5e9;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid var(--verde-claro);
-        }
+        footer { background: #111; color: #888; padding: 40px 0; margin-top: 60px; }
     </style>
 </head>
-<body>
+<body data-bs-theme="light">
+
+    <button class="theme-switch" onclick="toggleTheme()" title="Cambiar modo">🌓</button>
+
+    <div class="floating-dl text-end">
+        <div class="dl-menu text-start" id="dlMenu">
+            <h6 class="fw-bold mb-3" style="color:var(--verde-claro)">Descargas Críticas</h6>
+            <a href="data/mongabay_peru_raw.csv" download>📄 Datos Raw (CSV)</a>
+            <a href="data/mongabay_semantico_con_activadores.csv" download>📊 Dataset Semántico</a>
+            <a href="scripts/mongabay.py" download>🐍 Script: Scraper</a>
+            <a href="scripts/analisis_semantico_mongabay.py" download>🐍 Script: Análisis NLP</a>
+        </div>
+        <button class="btn btn-verde rounded-pill px-4 py-2 shadow-lg" onclick="toggleMenu()">
+            📥 Descargas Rápidas
+        </button>
+    </div>
 
     <header class="hero text-center">
         <div class="container">
-            <h1 class="display-3 fw-bold">🔍 Lupa Ecológica</h1>
-            <p class="lead opacity-75">Mapeo Semántico de la Agenda Ambiental en el Perú (2020–2025)</p>
+            <h1 class="display-4 fw-bold">🔍 Lupa Ecológica</h1>
+            <p class="lead opacity-75">Agenda Ambiental en el Perú (2020–2025)</p>
         </div>
     </header>
 
     <div class="container my-5">
         <div class="row">
-            <div class="col-lg-10 mx-auto">
-
+            <div class="col-lg-9 mx-auto">
+                
                 <section>
-                    <h2 class="section-title">1. Marco Institucional: ¿Qué es Mongabay?</h2>
+                    <h2 class="section-title">1. Marco Institucional</h2>
                     <p><strong>Mongabay</strong> es una organización mediática independiente y sin fines de lucro que informa sobre la naturaleza y los desafíos planetarios a través de una red global de periodistas locales.</p>
                 </section>
 
                 <section>
-                    <h2 class="section-title">2. Objetivo del proyecto</h2>
-                    <p>Esta investigación es de carácter <strong>exploratorio</strong> y busca identificar las prioridades temáticas y los patrones discursivos en la cobertura periodística sobre el Perú durante la primera mitad de la década actual (2020-2025).</p>
-                    <p>El objetivo principal es determinar cómo se distribuye el interés informativo entre distintos ejes de crisis y conservación, permitiendo visualizar qué aspectos del deterioro ambiental o de la gestión de recursos reciben mayor atención mediática en un país megadiverso y vulnerable.</p>
-                </section>
-
-                <section>
-                    <h2 class="section-title">3. Metodología</h2>
-                    <p>El proceso se divide en una fase de recolección automatizada y una fase de procesamiento lingüístico:</p>
-                    
-                    <div class="ms-3">
-                        <h4>Extracción de Datos</h4>
-                        <p>Se desarrolló un script en <strong>Python</strong> utilizando las librerías <code>Requests</code> y <code>BeautifulSoup</code> para realizar el raspado (scraping) de 41 páginas del archivo histórico de Mongabay Perú.</p>
-                        <p class="small text-muted"><em>Campos recolectados:</em> Titular, autor, fecha de publicación y enlace directo.</p>
-
-                        <h4 class="mt-4">Procesamiento con spaCy y "Activadores"</h4>
-                        <p>Para el análisis de los textos, se empleó <strong>spaCy</strong>, una biblioteca de procesamiento de lenguaje natural (NLP) de nivel industrial.</p>
-                        <ul>
-                            <li><strong>Lematización:</strong> El modelo <code>es_core_news_md</code> reduce cada palabra a su raíz lingüística (lema).</li>
-                            <li><strong>Detección por Activadores:</strong> El sistema utiliza términos específicos asociados a cada eje semántico.</li>
-                            <li><strong>Transparencia:</strong> Los activadores exactos se detallan fila por fila en los archivos finales.</li>
-                        </ul>
+                    <h2 class="section-title">2. Objetivo del Proyecto</h2>
+                    <div class="card-custom">
+                        <p>Esta investigación identifica las prioridades temáticas y los patrones discursivos en la cobertura periodística ambiental sobre el Perú. El fin es visualizar qué aspectos del deterioro ambiental reciben mayor atención mediática en un país megadiverso.</p>
                     </div>
                 </section>
 
-                <section class="my-5 p-4 bg-light border rounded">
-                    <h3 class="h5 fw-bold text-center mb-4">RECURSOS TÉCNICOS</h3>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <a href="scripts/scrape_mongabay.py" download class="btn btn-outline-dark w-100">Código: Scraper (PY)</a>
+                <section>
+                    <h2 class="section-title">3. Metodología Técnica</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="h-100 card-custom">
+                                <h5>Extracción</h5>
+                                <p class="small">Uso de <strong>Python (BeautifulSoup)</strong> para el raspado de 41 páginas del archivo histórico de Mongabay Perú.</p>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <a href="scripts/process_analisis_semantico_mongabay.py" download class="btn btn-outline-dark w-100">Código: Análisis (PY)</a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="data/mongabay_peru_raw.csv" download class="btn btn-outline-dark w-100">Datos Raw (CSV)</a>
+                        <div class="col-md-6">
+                            <div class="h-100 card-custom">
+                                <h5>NLP (spaCy)</h5>
+                                <p class="small">Lematización y detección por activadores semánticos mediante el modelo <code>es_core_news_md</code>.</p>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <section>
-                    <h2 class="section-title">4. Descripción del Corpus (2020–2025)</h2>
-                    <div class="row text-center">
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm"><strong>Rango</strong><br>2020 - 2025</div></div>
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm"><strong>Volumen</strong><br>1,201 Titulares</div></div>
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm"><strong>Geografía</strong><br>Perú</div></div>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="section-title">5. Limitaciones del Estudio</h2>
-                    <ul>
-                        <li><strong>Unidad de Análisis:</strong> Exclusivamente titulares (no cuerpo de noticias).</li>
-                        <li><strong>Nivel de Análisis:</strong> Coincidencia léxica mediante lemas (no análisis de sentimiento).</li>
-                        <li><strong>Definición de Ejes:</strong> Enfoque deductivo (categorías predefinidas).</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2 class="section-title">6. Resultados Cuantitativos</h2>
-                    <div class="highlight-box mb-4">
-                        <p class="mb-1"><strong>Titulares identificados:</strong> 978</p>
-                        <p class="mb-0"><strong>Total de asignaciones semánticas:</strong> 1,480</p>
-                    </div>
-
-                    <table class="table table-custom mt-4">
+                    <h2 class="section-title">4. Resultados</h2>
+                    <table class="table table-hover mt-3" style="color: var(--texto);">
                         <thead>
                             <tr>
                                 <th>Eje Semántico</th>
-                                <th class="text-center">Frecuencia (Menciones)</th>
-                                <th class="text-center">Descarga</th>
+                                <th class="text-center">Menciones</th>
+                                <th class="text-center">Link</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>Biodiversidad y Conservación</td><td class="text-center">584</td><td class="text-center"><a href="data/ejes/biodiversidad_conservacion.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                            <tr><td>Política y Gobernabilidad</td><td class="text-center">281</td><td class="text-center"><a href="data/ejes/politica_gobernabilidad.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                            <tr><td>Sociedad y Comunidades</td><td class="text-center">237</td><td class="text-center"><a href="data/ejes/sociedad_comunidades.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                            <tr><td>Economía y Desarrollo</td><td class="text-center">230</td><td class="text-center"><a href="data/ejes/economia_desarrollo.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                            <tr><td>Crimen e Ilegalidad</td><td class="text-center">148</td><td class="text-center"><a href="data/ejes/crimen_ilegalidad.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
+                            <tr><td>Biodiversidad y Conservación</td><td class="text-center">584</td><td class="text-center"><a href="data/ejes/biodiversidad_conservacion.csv" download class="btn btn-sm btn-outline-success">CSV</a></td></tr>
+                            <tr><td>Política y Gobernabilidad</td><td class="text-center">281</td><td class="text-center"><a href="data/ejes/politica_gobernabilidad.csv" download class="btn btn-sm btn-outline-success">CSV</a></td></tr>
+                            <tr><td>Sociedad y Comunidades</td><td class="text-center">237</td><td class="text-center"><a href="data/ejes/sociedad_comunidades.csv" download class="btn btn-sm btn-outline-success">CSV</a></td></tr>
+                            <tr><td>Economía y Desarrollo</td><td class="text-center">230</td><td class="text-center"><a href="data/ejes/economia_desarrollo.csv" download class="btn btn-sm btn-outline-success">CSV</a></td></tr>
+                            <tr><td>Crimen e Ilegalidad</td><td class="text-center">148</td><td class="text-center"><a href="data/ejes/crimen_ilegalidad.csv" download class="btn btn-sm btn-outline-success">CSV</a></td></tr>
                         </tbody>
                     </table>
-                    
-                    <div class="text-center mt-4">
-                        <a href="data/mongabay_semantico_con_activadores.csv" download class="btn btn-verde p-3 fw-bold">DESCARGAR BASE DE DATOS SEMÁNTICA COMPLETA</a>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="section-title">7. Conclusiones Descriptivas</h2>
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <p><strong>Frecuencia Temática:</strong> Prevalencia marcada del eje "Biodiversidad y Conservación", consistente con el perfil de la fuente.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Multitematicidad:</strong> Las noticias relacionan problemas ambientales con múltiples dimensiones simultáneamente.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Identificación:</strong> El modelo categorizó el 81.4% de la muestra, validando la metodología.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Potencial:</strong> Base para futuras investigaciones sobre tendencias temporales o regionales.</p>
-                        </div>
-                    </div>
                 </section>
 
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container text-center">
-            <p class="mb-2">Proyecto Académico: Lupa Ecológica - Análisis de Datos</p>
-            <p class="small">Mongabay Perú (2020-2025) | Procesado con Python y spaCy</p>
-        </div>
+    <footer class="text-center">
+        <p>Lupa Ecológica | 2026</p>
+        <p class="small">Datos: https://faridmayorga.github.io/lupaecologica/</p>
     </footer>
 
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute("data-bs-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            body.setAttribute("data-bs-theme", newTheme);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById("dlMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        // Cerrar menú al hacer clic fuera
+        window.onclick = function(event) {
+            if (!event.target.matches('.btn-verde')) {
+                const menu = document.getElementById("dlMenu");
+                if (menu.style.display === "block") menu.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
