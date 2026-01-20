@@ -5,48 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lupa Ecológica | Mapeo Semántico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
     <style>
         :root {
+            /* Variables Modo Claro (Default) */
             --verde-principal: #1a472a;
             --verde-claro: #2e7d32;
             --fondo: #fcfdfc;
             --texto: #2c3e50;
-            --card-bg: white;
-            --header-bg: #1a472a;
-            --footer-bg: #111;
+            --card-bg: #ffffff;
+            --muted-text: #6c757d;
+            --border-color: #e0e0e0;
+            --highlight-bg: #e8f5e9;
         }
 
-        [data-theme="dark"] {
+        [data-bs-theme="dark"] {
+            /* Variables Modo Oscuro */
+            --verde-principal: #2e7d32;
+            --verde-claro: #4caf50;
             --fondo: #121212;
             --texto: #e0e0e0;
             --card-bg: #1e1e1e;
-            --verde-principal: #2e7d32;
-            --verde-claro: #4caf50;
-            --header-bg: #0a1f12;
-            --footer-bg: #000;
+            --muted-text: #a0a0a0;
+            --border-color: #333;
+            --highlight-bg: #1b2e1f;
         }
 
         body { 
             background-color: var(--fondo); 
             color: var(--texto);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-            opacity: 0;
-            animation: fadeInPage 1s ease-in forwards;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Toggle Modo Oscuro */
-        .theme-switch-wrapper {
+        /* Botón de cambio de tema */
+        .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+            background: var(--verde-principal);
+            color: white;
         }
 
         .hero { 
-            background: var(--header-bg); 
+            background: var(--verde-principal); 
             color: white; 
             padding: 100px 0 60px 0; 
             border-bottom: 8px solid var(--verde-claro);
@@ -60,83 +74,95 @@
             margin-bottom: 25px;
             text-transform: uppercase;
             font-weight: bold;
+            font-size: 1.25rem;
         }
 
-        .card-download, .highlight-box, .table-custom, .list-group-item {
-            background-color: var(--card-bg) !important;
-            color: var(--texto) !important;
+        .card-download {
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--verde-claro);
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            color: var(--texto);
+        }
+
+        .card-download:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         .btn-verde {
             background-color: var(--verde-principal);
-            color: white; border: none; transition: 0.3s;
-        }
-
-        .btn-verde:hover { background-color: var(--verde-claro); color: white; }
-
-        /* Card Flotante de Descargas */
-        .floating-card {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 280px;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid var(--verde-claro);
-        }
-
-        .floating-card .card-header {
-            background: var(--verde-principal);
             color: white;
-            font-size: 0.9rem;
-            font-weight: bold;
-            padding: 10px;
-        }
-
-        .floating-card .list-group-item {
-            font-size: 0.85rem;
-            padding: 8px 15px;
             border: none;
-            border-bottom: 1px solid rgba(128,128,128,0.2);
+            transition: 0.3s;
         }
 
-        .floating-card a {
-            text-decoration: none;
-            color: var(--verde-claro);
-            display: block;
+        .btn-verde:hover {
+            background-color: var(--verde-claro);
+            color: white;
         }
 
-        .floating-card a:hover { color: var(--verde-principal); }
+        .table-custom {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--texto);
+        }
 
-        footer { background: var(--footer-bg); color: #888; padding: 50px 0; margin-top: 80px; }
+        .table-custom thead {
+            background: var(--verde-principal);
+            color: white !important;
+        }
 
-        @media (max-width: 768px) {
-            .floating-card { display: none; } /* Ocultar en móviles para no tapar texto */
+        .table-custom td {
+            border-color: var(--border-color);
+            color: var(--texto);
+        }
+
+        .highlight-box {
+            background: var(--highlight-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--verde-claro);
+        }
+
+        footer {
+            background: #111;
+            color: #888;
+            padding: 50px 0;
+            margin-top: 80px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .nav-link:hover {
+            color: white;
+        }
+
+        #descargas {
+            scroll-margin-top: 20px;
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-bs-theme="light">
 
-    <div class="theme-switch-wrapper">
-        <button id="theme-toggle" class="btn btn-sm btn-outline-light">🌙 Modo Oscuro</button>
-    </div>
-
-    <div class="floating-card card">
-        <div class="card-header text-center">📁 Accesos Directos</div>
-        <div class="list-group list-group-flush">
-            <div class="list-group-item"><a href="data/mongabay_semantico_con_activadores.csv" download>Dataset Semántico</a></div>
-            <div class="list-group-item"><a href="data/mongabay_peru_raw.csv" download>Datos Raw</a></div>
-            <div class="list-group-item"><a href="scripts/scrape_mongabay.py" download>Código Scraper</a></div>
-            <div class="list-group-item"><a href="scripts/process_analisis_semantico_mongabay.py" download>Código Análisis</a></div>
-        </div>
-    </div>
+    <button class="theme-toggle" id="themeBtn" title="Cambiar modo">
+        <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+    </button>
 
     <header class="hero text-center">
         <div class="container">
             <h1 class="display-3 fw-bold">🔍 Lupa Ecológica</h1>
             <p class="lead opacity-75">Mapeo Semántico de la Agenda Ambiental en el Perú (2020–2025)</p>
+            <nav class="mt-4">
+                <a href="#objetivo" class="btn btn-sm btn-outline-light mx-1">Objetivo</a>
+                <a href="#metodologia" class="btn btn-sm btn-outline-light mx-1">Metodología</a>
+                <a href="#resultados" class="btn btn-sm btn-outline-light mx-1">Resultados</a>
+                <a href="#descargas" class="btn btn-sm btn-light mx-1 text-dark fw-bold">Descargas</a>
+            </nav>
         </div>
     </header>
 
@@ -144,7 +170,7 @@
         <div class="row">
             <div class="col-lg-10 mx-auto">
 
-                <section>
+                <section id="objetivo">
                     <h2 class="section-title">1. Marco Institucional: ¿Qué es Mongabay?</h2>
                     <p><strong>Mongabay</strong> es una organización mediática independiente y sin fines de lucro que informa sobre la naturaleza y los desafíos planetarios a través de una red global de periodistas locales.</p>
                 </section>
@@ -155,7 +181,7 @@
                     <p>El objetivo principal es determinar cómo se distribuye el interés informativo entre distintos ejes de crisis y conservación, permitiendo visualizar qué aspectos del deterioro ambiental o de la gestión de recursos reciben mayor atención mediática en un país megadiverso y vulnerable.</p>
                 </section>
 
-                <section>
+                <section id="metodologia">
                     <h2 class="section-title">3. Metodología</h2>
                     <p>El proceso se divide en una fase de recolección automatizada y una fase de procesamiento lingüístico:</p>
                     
@@ -174,31 +200,16 @@
                     </div>
                 </section>
 
-                <section class="my-5 p-4 bg-light border rounded shadow-sm card-download">
-                    <h3 class="h5 fw-bold text-center mb-4">RECURSOS TÉCNICOS</h3>
-                    <div class="row g-3 text-center">
-                        <div class="col-md-4">
-                            <a href="scripts/scrape_mongabay.py" download class="btn btn-outline-dark w-100">Código: Scraper (PY)</a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="scripts/process_analisis_semantico_mongabay.py" download class="btn btn-outline-dark w-100">Código: Análisis (PY)</a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="data/mongabay_peru_raw.csv" download class="btn btn-outline-dark w-100">Datos Raw (CSV)</a>
-                        </div>
-                    </div>
-                </section>
-
                 <section>
                     <h2 class="section-title">4. Descripción del Corpus (2020–2025)</h2>
                     <div class="row text-center">
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm highlight-box"><strong>Rango</strong><br>2020 - 2025</div></div>
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm highlight-box"><strong>Volumen</strong><br>1,201 Titulares</div></div>
-                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm highlight-box"><strong>Geografía</strong><br>Perú</div></div>
+                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm card-download"><strong>Rango</strong><br>2020 - 2025</div></div>
+                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm card-download"><strong>Volumen</strong><br>1,201 Titulares</div></div>
+                        <div class="col-md-4"><div class="p-3 border rounded shadow-sm card-download"><strong>Geografía</strong><br>Perú</div></div>
                     </div>
                 </section>
 
-                <section>
+                <section id="resultados">
                     <h2 class="section-title">5. Limitaciones del Estudio</h2>
                     <ul>
                         <li><strong>Unidad de Análisis:</strong> Exclusivamente titulares (no cuerpo de noticias).</li>
@@ -214,37 +225,86 @@
                         <p class="mb-0"><strong>Total de asignaciones semánticas:</strong> 1,480</p>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-custom mt-4">
-                            <thead>
-                                <tr>
-                                    <th>Eje Semántico</th>
-                                    <th class="text-center">Frecuencia</th>
-                                    <th class="text-center">Descarga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Biodiversidad y Conservación</td><td class="text-center">584</td><td class="text-center"><a href="data/ejes/biodiversidad_conservacion.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                                <tr><td>Política y Gobernabilidad</td><td class="text-center">281</td><td class="text-center"><a href="data/ejes/politica_gobernabilidad.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                                <tr><td>Sociedad y Comunidades</td><td class="text-center">237</td><td class="text-center"><a href="data/ejes/sociedad_comunidades.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                                <tr><td>Economía y Desarrollo</td><td class="text-center">230</td><td class="text-center"><a href="data/ejes/economia_desarrollo.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                                <tr><td>Crimen e Ilegalidad</td><td class="text-center">148</td><td class="text-center"><a href="data/ejes/crimen_ilegalidad.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="table table-custom mt-4">
+                        <thead>
+                            <tr>
+                                <th>Eje Semántico</th>
+                                <th class="text-center">Frecuencia (Menciones)</th>
+                                <th class="text-center">Descarga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Biodiversidad y Conservación</td><td class="text-center">584</td><td class="text-center"><a href="data/ejes/biodiversidad_conservacion.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
+                            <tr><td>Política y Gobernabilidad</td><td class="text-center">281</td><td class="text-center"><a href="data/ejes/politica_gobernabilidad.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
+                            <tr><td>Sociedad y Comunidades</td><td class="text-center">237</td><td class="text-center"><a href="data/ejes/sociedad_comunidades.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
+                            <tr><td>Economía y Desarrollo</td><td class="text-center">230</td><td class="text-center"><a href="data/ejes/economia_desarrollo.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
+                            <tr><td>Crimen e Ilegalidad</td><td class="text-center">148</td><td class="text-center"><a href="data/ejes/crimen_ilegalidad.csv" download class="btn btn-sm btn-verde">CSV</a></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="descargas" class="mt-5">
+                    <h2 class="section-title">7. Centro de Descargas y Datos</h2>
+                    <p>Accede a todos los recursos generados en esta investigación de manera directa:</p>
                     
-                    <div class="text-center mt-4">
-                        <a href="data/mongabay_semantico_con_activadores.csv" download class="btn btn-verde p-3 fw-bold shadow">DESCARGAR BASE DE DATOS SEMÁNTICA COMPLETA</a>
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-6">
+                            <div class="card card-download h-100 p-4 text-center">
+                                <i class="bi bi-file-earmark-bar-graph fs-1 text-success mb-3"></i>
+                                <h4>Resumen Semántico</h4>
+                                <p class="small text-muted">Contiene el conteo consolidado por ejes temáticos.</p>
+                                <a href="data/summary_ejes_semanticos.csv" download class="btn btn-verde mt-auto">Descargar Summary CSV</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card card-download h-100 p-4 text-center">
+                                <i class="bi bi-database-fill-check fs-1 text-success mb-3"></i>
+                                <h4>Base de Datos Completa</h4>
+                                <p class="small text-muted">Data procesada con activadores semánticos detallados.</p>
+                                <a href="data/mongabay_semantico_con_activadores.csv" download class="btn btn-verde mt-auto">Descargar Base Completa</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card card-download p-3 text-center">
+                                <i class="bi bi-code-slash mb-2"></i>
+                                <h6>Scraper (Python)</h6>
+                                <a href="scripts/scrape_mongabay.py" download class="btn btn-sm btn-outline-dark">Descargar</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-download p-3 text-center">
+                                <i class="bi bi-braces mb-2"></i>
+                                <h6>Análisis (Python)</h6>
+                                <a href="scripts/process_analisis_semantico_mongabay.py" download class="btn btn-sm btn-outline-dark">Descargar</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-download p-3 text-center">
+                                <i class="bi bi-filetype-csv mb-2"></i>
+                                <h6>Datos Crudos (Raw)</h6>
+                                <a href="data/mongabay_peru_raw.csv" download class="btn btn-sm btn-outline-dark">Descargar</a>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                <section>
-                    <h2 class="section-title">7. Conclusiones Descriptivas</h2>
+                <section class="mt-5">
+                    <h2 class="section-title">8. Conclusiones Descriptivas</h2>
                     <div class="row g-4">
-                        <div class="col-md-6"><p><strong>Frecuencia Temática:</strong> Prevalencia marcada del eje "Biodiversidad y Conservación", consistente con el perfil de la fuente.</p></div>
-                        <div class="col-md-6"><p><strong>Multitematicidad:</strong> Las noticias relacionan problemas ambientales con múltiples dimensiones simultáneamente.</p></div>
-                        <div class="col-md-6"><p><strong>Identificación:</strong> El modelo categorizó el 81.4% de la muestra, validando la metodología.</p></div>
-                        <div class="col-md-6"><p><strong>Potencial:</strong> Base para futuras investigaciones sobre tendencias temporales o regionales.</p></div>
+                        <div class="col-md-6">
+                            <p><strong>Frecuencia Temática:</strong> Prevalencia marcada del eje "Biodiversidad y Conservación", consistente con el perfil de la fuente.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Multitematicidad:</strong> Las noticias relacionan problemas ambientales con múltiples dimensiones simultáneamente.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Identificación:</strong> El modelo categorizó el 81.4% de la muestra, validando la metodología.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Potencial:</strong> Base para futuras investigaciones sobre tendencias temporales o regionales.</p>
+                        </div>
                     </div>
                 </section>
 
@@ -260,21 +320,32 @@
     </footer>
 
     <script>
-        // Script para el cambio de tema
-        const toggleBtn = document.getElementById('theme-toggle');
-        const body = document.body;
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
 
-        toggleBtn.addEventListener('click', () => {
-            if (body.getAttribute('data-theme') === 'light') {
-                body.setAttribute('data-theme', 'dark');
-                toggleBtn.innerText = '☀️ Modo Claro';
-                toggleBtn.classList.replace('btn-outline-light', 'btn-outline-warning');
-            } else {
-                body.setAttribute('data-theme', 'light');
-                toggleBtn.innerText = '🌙 Modo Oscuro';
-                toggleBtn.classList.replace('btn-outline-warning', 'btn-outline-light');
-            }
+        // Cargar preferencia guardada o sistema
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        setTheme(savedTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
         });
+
+        function setTheme(theme) {
+            document.body.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            if (theme === 'dark') {
+                themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+            } else {
+                themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+            }
+        }
     </script>
 
 </body>
